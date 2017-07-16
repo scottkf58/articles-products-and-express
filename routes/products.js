@@ -10,15 +10,15 @@ router.route( '/' )
   } );
 
 router.route( '/:id' )
-  .put((req, res)=>{
+  .put( (req, res) => {
     console.log( '/:id put');
 
   })
-  .get((req, res)=>{
+  .get( (req, res) => {
     console.log( `${ req.params.id } get`);
 
   })
-  .delete( (req, res)=>{
+  .delete( (req, res) => {
     console.log( '/:id delete');
 
   });
@@ -31,4 +31,4 @@ router.get( '/new', ( req, res ) => {
   console.log( 'new' );
 } );
 
-  module.exports = router;
+module.exports = router;
