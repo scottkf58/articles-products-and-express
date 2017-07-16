@@ -1,24 +1,32 @@
 const express = require('express');
 const expbhs = require('express-handlebars');
-const app = express();
-const articleRoute = require('./routes/articles.js');
-const productRoute = require('./routes/products.js');
 const bodyParser = require('body-parser');
 
 
-app.use(bodyParser.json());
+const articleRoute = require('./routes/articles.js');
+const productRoute = require('./routes/products.js');
+const articleDatabase = require( './db/articles.js' );
+const productDatabase = require( './db/product.js' );
+
+
+const app = express();
+
+
 const PORT = process.env.PORT || 3000;
+
+
+app.use(bodyParser.json());
 
 app.use('/articles', articleRoute);
 app.use('/products', productRoute);
 
-// const hbs = expbhs.create({
-//   extname: 'hbs',
-//   defaultLayout: 'main'
-// })
+const hbs = expbhs.create({
+  extname: 'hbs',
+  defaultLayout: 'main'
+});
 
-// app.engine('hbs', hbs.engine);
-// app.set('view engine', 'hbs');
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
 
 
 
@@ -28,5 +36,5 @@ app.use('/products', productRoute);
 
 
 const server = app.listen(PORT, () => {
-  console.log('Server running on ${PORT}');
+  console.log(`Server running on ${PORT}`);
 })
