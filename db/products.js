@@ -7,10 +7,12 @@
   }
 
   function getProductIndexById( id ){
+    let idNum = parseFloat( id );
+
     let productIndex = null;
 
     for( var i = 0; i < productArray.length; i++ ){
-      if( id === productArray[ i ].id ){
+      if( idNum === productArray[ i ].id ){
         productIndex = i;
         break;
       }
@@ -31,8 +33,7 @@
 
 
   function updateProduct( id, productDetails ){
-    let idNum = parseFloat( id );
-    let productIndex = getProductIndexById( idNum );
+    let productIndex = getProductIndexById( id );
     console.log( `id ${typeof id}` );
     let isSuccessful = false;
     if( productIndex != null ){
@@ -57,12 +58,15 @@
   }
 
   function deleteProduct( id ){
+    console.log( `before ${productArray.length}`);
     let targetProductIndex = getProductIndexById( id );
     let isSuccessful = false;
     if( targetProductIndex !== null ){
       productArray.splice( targetProductIndex, 1 );
       isSuccessful = true;
     }
+    console.log( `after ${productArray.length}`);
+    console.log( productArray );
     return  isSuccessful;
   }
 
