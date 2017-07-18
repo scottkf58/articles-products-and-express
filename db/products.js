@@ -18,6 +18,17 @@
     return productIndex;
   }
 
+  function isProductDuplicate( { name } ){
+    let isProductDuplicate = false;
+    for( var i = 0; i < productArray.length; i++ ){
+      if( name === productArray[ i ].name ){
+        isProductDuplicate = true;
+        break;
+      }
+    }
+    return isProductDuplicate;
+  }
+
 
   function updateProduct( productDetails ){
     let productIndex = getProductIndexById( productDetails.id );
@@ -32,9 +43,13 @@
   }
 
   function addProduct( product ){
-    product.id = addIdNumber();
-    productArray.push( product );
-    return product;
+    let isNewProduct = !isProductDuplicate( product );
+    if( isNewProduct ){
+      product.id = addIdNumber();
+      productArray.push( product );
+      console.log( product );
+    }
+    return isNewProduct;
   }
 
   function deleteProduct( id ){
