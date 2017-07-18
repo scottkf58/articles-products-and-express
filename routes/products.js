@@ -15,14 +15,17 @@ router.route( '/' )
     } else {
       res.redirect( 400, './products/new' );
     }
-
-    res.redirect( { success: true } );
   } );
 
 router.route( '/:id' )
   .put( (req, res) => {
     console.log( '/:id put');
-
+    let isSuccessful = productDb.updateProduct( req.params.id, req.body );
+    if( isSuccessful ){
+      res.redirect( 200, `/products/${ req.params.id }` );
+    } else {
+      res.redirect( 400, `/products/${ req.params.id }/edit`);
+    }
   })
   .get( (req, res) => {
     console.log( `${ req.params.id } get`);
