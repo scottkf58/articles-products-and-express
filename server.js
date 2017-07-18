@@ -34,4 +34,4 @@ app.set('view engine', 'hbs');
 
 const server = app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
-})
+});
