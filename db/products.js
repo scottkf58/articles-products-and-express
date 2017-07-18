@@ -19,8 +19,16 @@
   }
 
 
-  function updateProduct( id ){
-
+  function updateProduct( productDetails ){
+    let productIndex = getProductIndexById( productDetails.id );
+    let isSuccessful = false;
+    if( productIndex != null ){
+      for( var key in productDetails ){
+        productArray[ productIndex ][ key ] = productDetails[ key ];
+      }
+      isSuccessful = true;
+    }
+    return isSuccessful;
   }
 
   function addProduct( product ){
