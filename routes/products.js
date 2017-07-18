@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
+const productDb = require( './../db/products.js' );
+
 router.route( '/' )
   .get( ( req, res ) => {
     console.log( '/ get');
   } )
   .post( ( req, res ) => {
     console.log( '/ post');
+    productDb.addProduct( req.body );
+    res.send( { success: true } );
   } );
 
 router.route( '/:id' )
