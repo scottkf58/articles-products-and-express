@@ -1,5 +1,5 @@
 ( function(){
-  const productArray = [];
+  const productArray = [ {"name":"shield","price":"!34","inventory":"many","id":100} ];  //delete later
   var idNumber = 100;
 
   function addIdNumber(){
@@ -30,15 +30,19 @@
   }
 
 
-  function updateProduct( productDetails ){
-    let productIndex = getProductIndexById( productDetails.id );
+  function updateProduct( id, productDetails ){
+    let idNum = parseFloat( id );
+    let productIndex = getProductIndexById( idNum );
+    console.log( `id ${typeof id}` );
     let isSuccessful = false;
     if( productIndex != null ){
+      console.log( productArray[ productIndex ] );
       for( var key in productDetails ){
         productArray[ productIndex ][ key ] = productDetails[ key ];
       }
       isSuccessful = true;
     }
+      console.log( productArray[ productIndex ] );
     return isSuccessful;
   }
 
