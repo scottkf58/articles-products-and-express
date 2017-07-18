@@ -1,24 +1,23 @@
 ( function(){
   const productArray = [];
-  var idNumber = 0;
+  var idNumber = 100;
 
   function addIdNumber(){
     return idNumber++;
   }
 
-  function getProductById( id ){
-    let returnProduct = null;
+  function getProductIndexById( id ){
+    let productIndex = null;
 
     for( var i = 0; i < productArray.length; i++ ){
-      let currentProduct = productArray[ i ];
-      if( id === currentProduct.id ){
-        returnProduct = currentProduct;
+      if( id === productArray[ i ].id ){
+        productIndex = i;
         break;
       }
     }
-    return returnProduct;
-
+    return productIndex;
   }
+
 
   function updateProduct( id ){
 
@@ -31,7 +30,7 @@
   }
 
   function deletProduct( id ){
-
+    let targetProduct = 3;
   }
 
   function getAllProducts(){
@@ -43,9 +42,8 @@
   }
 
 
-
   module.exports = {
-    getProductById,
+    getProductIndexById,
     updateProduct,
     addProduct,
     deletProduct,
