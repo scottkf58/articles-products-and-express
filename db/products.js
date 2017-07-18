@@ -37,8 +37,9 @@
     return productArray;
   }
 
-  function getProduct( id ){
-
+  function getProductById( id ){
+    let productIndex = getProductIndexById( id );
+    return (  productIndex !== null ) ? productArray[ productIndex ] : productIndex;
   }
 
 
@@ -48,7 +49,7 @@
     addProduct,
     deletProduct,
     getAllProducts,
-    getProduct
+    getProductById
   };
 
 } )();
