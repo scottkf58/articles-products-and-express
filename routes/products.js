@@ -9,8 +9,14 @@ router.route( '/' )
   } )
   .post( ( req, res ) => {
     console.log( '/ post');
-    productDb.addProduct( req.body );
-    res.send( { success: true } );
+    let isSuccessful = productDb.addProduct( req.body );
+    if( isSuccessful ){
+      res.redirect( 200, './products' );
+    } else {
+      res.redirect( 400, './products/new' );
+    }
+
+    res.redirect( { success: true } );
   } );
 
 router.route( '/:id' )
