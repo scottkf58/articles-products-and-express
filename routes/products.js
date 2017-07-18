@@ -33,7 +33,12 @@ router.route( '/:id' )
   })
   .delete( (req, res) => {
     console.log( '/:id delete');
-
+    let isSuccessful = productDb.deleteProduct( req.params.id );
+    if( isSuccessful ){
+      res.redirect( 200, `/products` );
+    } else {
+      res.redirect( 400, `/products/${ req.params.id }`);
+    }
   });
 
 router.get( '/:id/edit', (req, res) => {
