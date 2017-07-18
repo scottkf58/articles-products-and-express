@@ -29,8 +29,14 @@
     return product;
   }
 
-  function deletProduct( id ){
-    let targetProduct = 3;
+  function deleteProduct( id ){
+    let targetProductIndex = getProductIndexById( id );
+    let isSuccessful = false;
+    if( targetProductIndex !== null ){
+      productArray.splice( targetProductIndex, 1 );
+      isSuccessful = true;
+    }
+    return  isSuccessful;
   }
 
   function getAllProducts(){
@@ -47,7 +53,7 @@
     getProductIndexById,
     updateProduct,
     addProduct,
-    deletProduct,
+    deleteProduct,
     getAllProducts,
     getProductById
   };
