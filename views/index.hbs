@@ -1,10 +1,10 @@
 <div>
-  {{#each products}}
+  {{#each productList}}
     <div class = 'item'>
-      <p>{{id}}</p>
+      <p>#{{id}}</p>
       <p>{{name}}</p>
-      <p>{{price}}</p>
-      <p>{{inventory}}</p>
+      <p>${{price}}</p>
+      <p>{{inventory}} left</p>
     </div>
   {{/each}}
 </div>
