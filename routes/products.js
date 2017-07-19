@@ -10,7 +10,10 @@ router.route( '/' )
     console.log( '/ get');
     //GET responds with HTML generated from your template which displays all Products added thus far.
 //file name: index.hbs
-    var products = productDb.getAllProducts();
+    //console.log( productDb.getAllProducts());
+    var products = {
+      productList : productDb.getAllProducts()
+    };
     res.render( 'index', products );
   } )
   .post( ( req, res ) => {
