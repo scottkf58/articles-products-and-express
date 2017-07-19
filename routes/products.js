@@ -3,9 +3,15 @@ const router = express.Router();
 
 const productDb = require( './../db/products.js' );
 
+
+
 router.route( '/' )
   .get( ( req, res ) => {
     console.log( '/ get');
+    //GET responds with HTML generated from your template which displays all Products added thus far.
+//file name: index.hbs
+    var products = productDb.getAllProducts();
+    res.render( 'index', products );
   } )
   .post( ( req, res ) => {
     console.log( '/ post');
