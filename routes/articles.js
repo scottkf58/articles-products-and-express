@@ -2,34 +2,61 @@ const express = require('express');
 const router = express.Router();
 const articles = require('../db/articles.js');
 
-router.route( '/' )
-  .get( ( req, res ) => {
-    console.log( '/ get');
-  } )
-  .post( ( req, res ) => {
-    console.log( '/ post');
-  } );
 
-router.route( '/:title' )
-  .put( (req, res) => {
-    console.log( '/:title put');
-
-  })
+router.route('/')
   .get( (req, res) => {
-    console.log( `${ req.params.title } get`);
-
+    articles.getAll();
   })
-  .delete( (req, res) => {
-    console.log( '/:title delete');
-
+  .post( (req, res) => {
+    articles.add(req.body);
+    res.json({
+      'success' : true
+    });
   });
 
-router.get( '/:title/edit', (req, res) => {
-  console.log( 'edit' );
-} );
 
-router.get( '/new', ( req, res ) => {
-  console.log( 'new' );
-} );
+router.route('/:title')
+  .put( (req, res) => {
+    req.body.title = req.params.title;
+    articles.editArticle(req.body);
+    res.json({
+      'success' : true
+    });
+  })
+  .get( (req, res) => {
+    //console.log(`${req.params.title} get`);
+    req.body.title = req.params.title;
+    articles.getArticle.(req.body);
+    res.json({
+      'success' : true
+    });
+  })
+  .delete( (req, res) => {
+    //console.log('/:title delete');
+    articles.deleteArticle(req.params.title);
+    res.json({
+      'success' : true
+    });
+  });
+
+
+router.route('/:title/edit')
+  .post( (req, res) => {
+    req.body.title = req.params.title;
+    articles.editArticle(req.body);
+    res.json({
+      'success' : true
+    });
+  })
+  .get( (req, res) => {
+    req.body.title = req.params.title;
+    articles.getArticle(req.body);
+    // Render??
+  });
+
+
+router.get('/new', (req, res) => {
+  res.render('new');
+});
 
 module.exports = router;
