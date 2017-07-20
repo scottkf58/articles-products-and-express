@@ -14,7 +14,7 @@ router.route( '/' )
     var products = {
       productList : productDb.getAllProducts()
     };
-    res.render( 'index', products );
+    res.render( './products/index', products );
   } )
   .post( ( req, res ) => {
     console.log( '/ post');
