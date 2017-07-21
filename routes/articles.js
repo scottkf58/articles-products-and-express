@@ -26,7 +26,7 @@ router.route('/:title')
   .get( (req, res) => {
     //console.log(`${req.params.title} get`);
     req.body.title = req.params.title;
-    articles.getArticle.(req.body);
+    articles.getArticle(req.body);
     res.json({
       'success' : true
     });
