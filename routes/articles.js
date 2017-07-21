@@ -3,18 +3,14 @@ const router = express.Router();
 const articles = require('../db/articles.js');
 
 
+router.get('/new', (req, res) => {
+  console.log('new route');
+  res.render('./articles/new');
+});
 
 
 router.route('/:title/edit')
-  // .post( (req, res) => {
-  //   req.body.title = req.params.title;
-  //   articles.editArticle(req.body);
-  //   res.json({
-  //     'success' : true
-  //   });
-  // })
   .get( (req, res) => {
-
     var editArticle = articles.getArticle(req.params.title);
     res.render('./articles/edit', editArticle);
   });
@@ -42,6 +38,7 @@ router.route('/:title')
     });
   });
 
+
 router.route('/')
   .get( (req, res) => {
     var articleList = {
@@ -58,8 +55,5 @@ router.route('/')
 
 
 
-router.get('/new', (req, res) => {
-  res.render('new');
-});
 
 module.exports = router;
