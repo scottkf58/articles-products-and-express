@@ -13,13 +13,14 @@ return false;
 
 // Post request
 function add (newArt) {
+  console.log(newArt);
   let tempArt = {
     title : newArt.title,
     body : newArt.body,
     author : newArt.author,
     urlTitle : encodeURI(newArt.title)
   };
-
+  collection.push(tempArt);
 }
 
 // Get request
@@ -28,8 +29,14 @@ function getAll () {
 }
 
 // Put request
-function editArticle () {
-
+function editArticle (obj) {
+  collection.forEach( (element) => {
+    if(element.title === obj.body.title &&
+      obj.params.title === element.title) {
+      element.body = obj.body.body;
+      element.author = obj.body.author;
+    }
+  })
 }
 
 // Delete article
