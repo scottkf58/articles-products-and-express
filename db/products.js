@@ -67,7 +67,7 @@
     }
     console.log( `after ${productArray.length}`);
     console.log( productArray );
-    return  isSuccessful;
+    return isSuccessful;
   }
 
   function getAllProducts(){

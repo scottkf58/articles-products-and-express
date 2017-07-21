@@ -5,7 +5,10 @@ const articles = require('../db/articles.js');
 
 router.route('/')
   .get( (req, res) => {
-    res.send(articles.getAll());
+    var articleList = {
+      articleList : articles.getAll()
+    };
+    res.render( './articles/index', articleList);
   })
   .post( (req, res) => {
     articles.add(req.body);
