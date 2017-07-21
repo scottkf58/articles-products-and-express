@@ -6,6 +6,7 @@ const articles = require('../db/articles.js');
 router.route('/')
   .get( (req, res) => {
     articles.getAll();
+    res.end();
   })
   .post( (req, res) => {
     articles.add(req.body);
@@ -26,7 +27,7 @@ router.route('/:title')
   .get( (req, res) => {
     //console.log(`${req.params.title} get`);
     req.body.title = req.params.title;
-    articles.getArticle.(req.body);
+    articles.getArticle(req.body);
     res.json({
       'success' : true
     });
