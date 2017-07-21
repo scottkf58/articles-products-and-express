@@ -5,7 +5,7 @@ const articles = require('../db/articles.js');
 
 router.route('/')
   .get( (req, res) => {
-    articles.getAll();
+    res.send(articles.getAll());
   })
   .post( (req, res) => {
     articles.add(req.body);
