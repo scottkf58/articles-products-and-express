@@ -1,4 +1,11 @@
-const collection = [];
+const collection = [
+  {
+  title: "newtitle",
+  body: "new body",
+  author: "The Author",
+  urlTitle: "newtitle"
+  }
+];
 var article;
 var index;
 
@@ -31,18 +38,17 @@ function getAll () {
 // Put request
 function editArticle (obj) {
   collection.forEach( (element) => {
-    if(element.title === obj.body.title &&
-      obj.params.title === element.title) {
-      element.body = obj.body.body;
-      element.author = obj.body.author;
+    if(element.title === obj.title) {
+      element.body = obj.body;
+      element.author = obj.author;
     }
   })
 }
 
 // Delete article
-function deleteArticle (obj) {
+function deleteArticle (title) {
   collection.forEach( (element) => {
-    if(obj.params.title === element.title) {
+    if(title === element.title) {
       index = collection.indexOf(element);
       collection.splice(index, 1);
     }
