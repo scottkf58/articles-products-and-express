@@ -1,4 +1,4 @@
-<form action="/articles/:title" method="put">
+<form action="/articles/{{title}}" method="post">
   <label for="title">title</label>
   <br>
   <input type="text" id="title" name="title" value="{{title}}">
@@ -19,5 +19,7 @@
   <input type="text" id="urlTitle" name="urlTitle" value="{{urlTitle}}">
   <br>
   <br>
-  <input type="submit" value="Send">
+
+  <input type="hidden" name="_method" value="PUT">
+  <input type="submit" value="Edit Something">
 </form>

@@ -7,8 +7,6 @@ const collection = [
   }
 ];
 
-var article;
-var index;
 
 function getArticleByTitle (title) {
   for(var i = 0; i < collection.length; i++) {
@@ -21,7 +19,6 @@ return false;
 
 // Post request
 function add (newArt) {
-  console.log(newArt);
   let tempArt = {
     title : newArt.title,
     body : newArt.body,
@@ -37,11 +34,14 @@ function getAll () {
 }
 
 // Put request
-function editArticle (obj) {
+function editArticle (title, obj) {
   collection.forEach( (element) => {
-    if(element.title === obj.title) {
+    if(element.title === title) {
+      element.title = obj.title
       element.body = obj.body;
       element.author = obj.author;
+      element.urlTitle = obj.urlTitle;
+      //console.log(element);
     }
   })
 }
@@ -50,19 +50,16 @@ function editArticle (obj) {
 function deleteArticle (title) {
   collection.forEach( (element) => {
     if(title === element.title) {
-      index = collection.indexOf(element);
+      var index = collection.indexOf(element);
       collection.splice(index, 1);
     }
   })
 }
 
 // Get request
-function getArticle (obj) {
-  collection.forEach( (element) => {
-    if(obj.params.title === element.title) {
-      article = element;
-    }
-  })
+function getArticle (title) {
+  var articleIndex = getArticleByTitle(title);
+  return collection[articleIndex];
 }
 
 
