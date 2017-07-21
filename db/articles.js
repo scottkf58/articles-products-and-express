@@ -1,11 +1,12 @@
 const collection = [
   {
-  title: "newtitle",
-  body: "new body",
-  author: "The Author",
-  urlTitle: "newtitle"
+    title: "thetitle",
+    body: "thebody",
+    author: "theAuthor",
+    urlTitle: "thetitle"
   }
 ];
+
 var article;
 var index;
 
