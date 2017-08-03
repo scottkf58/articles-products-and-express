@@ -20,9 +20,9 @@ router.route('/:title')
     //console.log('Put request');
     articles.editArticle(req.params.title, req.body);
 
-    res.json({
-      'success' : true
-    });
+    // res.json({
+    //   'success' : true
+    // });
   })
   .get( (req, res) => {
     var thisArticle = articles.getArticle(req.params.title);
@@ -33,9 +33,9 @@ router.route('/:title')
   })
   .delete( (req, res) => {
     articles.deleteArticle(req.params.title);
-    res.json({
-      'success' : true
-    });
+    // res.json({
+    //   'success' : true
+    // });
   });
 
 
@@ -48,9 +48,9 @@ router.route('/')
   })
   .post( (req, res) => {
     articles.add(req.body);
-    res.json({
-      'success' : true
-    });
+    // res.json({
+    //   'success' : true
+    // });
   });
 
 
