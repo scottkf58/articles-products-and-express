@@ -4,13 +4,43 @@ const router = express.Router();
 const productDb = require( './../db/products.js' );
 
 
+router.get( '/new', ( req, res ) => {
+  console.log( 'new' );
+} );
+
+router.get( '/:id/edit', (req, res) => {
+} );
+
+router.route( '/:id' )
+  .put( (req, res) => {
+    console.log( '/:id put');
+    let isSuccessful = productDb.updateProduct( req.params.id, req.body );
+    if( isSuccessful ){
+      res.redirect( 200, `/products/${ req.params.id }` );
+    } else {
+      res.redirect( 400, `/products/${ req.params.id }/edit`);
+    }
+  })
+  .get( (req, res) => {
+
+    let productInfo = productDb.getProductById( req.params.id );
+    res.render( 'products/product', productInfo );
+
+  })
+  .delete( (req, res) => {
+    console.log( '/:id delete');
+    let isSuccessful = productDb.deleteProduct( req.params.id );
+    if( isSuccessful ){
+      res.redirect( 200, `/products` );
+    } else {
+      res.redirect( 400, `/products/${ req.params.id }`);
+    }
+  });
+
 
 router.route( '/' )
   .get( ( req, res ) => {
     console.log( '/ get');
-    //GET responds with HTML generated from your template which displays all Products added thus far.
-//file name: index.hbs
-    //console.log( productDb.getAllProducts());
     var products = {
       productList : productDb.getAllProducts()
     };
@@ -25,37 +55,5 @@ router.route( '/' )
       res.redirect( 400, './products/new' );
     }
   } );
-
-router.route( '/:id' )
-  .put( (req, res) => {
-    console.log( '/:id put');
-    let isSuccessful = productDb.updateProduct( req.params.id, req.body );
-    if( isSuccessful ){
-      res.redirect( 200, `/products/${ req.params.id }` );
-    } else {
-      res.redirect( 400, `/products/${ req.params.id }/edit`);
-    }
-  })
-  .get( (req, res) => {
-    console.log( `${ req.params.id } get`);
-
-  })
-  .delete( (req, res) => {
-    console.log( '/:id delete');
-    let isSuccessful = productDb.deleteProduct( req.params.id );
-    if( isSuccessful ){
-      res.redirect( 200, `/products` );
-    } else {
-      res.redirect( 400, `/products/${ req.params.id }`);
-    }
-  });
-
-router.get( '/:id/edit', (req, res) => {
-  console.log( 'edit' );
-} );
-
-router.get( '/new', ( req, res ) => {
-  console.log( 'new' );
-} );
 
 module.exports = router;
