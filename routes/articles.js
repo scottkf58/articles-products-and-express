@@ -32,7 +32,12 @@ router.route('/:title')
   .get( (req, res) => {
     articles.getArticle(req.params.title)
       .then((data) => {
-        res.render('./articles/articles', {data});
+        console.log(data);
+        res.render('../views/articles/articles', data);
+      })
+      .catch((err) => {
+        console.log( 'erroring');
+        console.log(err);
       });
     // res.json({
     //   'success' : true
