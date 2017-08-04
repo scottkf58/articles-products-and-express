@@ -31,7 +31,7 @@ function getAllArticles () {
 
 // Put request
 function editArticle (title, obj) {
-  collection.forEach( (element) => {
+  /*collection.forEach( (element) => {
     if(element.title === title) {
       element.title = obj.title;
       element.body = obj.body;
@@ -39,7 +39,8 @@ function editArticle (title, obj) {
       element.urlTitle = obj.urlTitle;
       //console.log(element);
     }
-  })
+  })*/
+  return db.none( "UPDATE articles SET title = ${title}, body = ${body}, author = ${author}, urltitle = ${urlTitle} WHERE body = 'body2';", obj);
 }
 
 // Delete article
@@ -54,8 +55,7 @@ function deleteArticle (title) {
 
 // Get request
 function getArticle (title) {
-  var articleIndex = getArticleByTitle(title);
-  return collection[articleIndex];
+  return db.one(`SELECT * FROM articles WHERE title = ${title}`);
 }
 
 
