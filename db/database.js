@@ -30,7 +30,7 @@ function getAllArticles () {
 }
 
 // Put request
-function editArticle (title, obj) {
+function editArticle (articleName, obj) {
   /*collection.forEach( (element) => {
     if(element.title === title) {
       element.title = obj.title;
@@ -40,8 +40,10 @@ function editArticle (title, obj) {
       //console.log(element);
     }
   })*/
-  return db.none( "UPDATE articles SET title = ${title}, body = ${body}, author = ${author}, urltitle = ${urlTitle} WHERE body = 'body2';", obj);
+  obj['articleName'] = articleName;
+  return db.none( "UPDATE articles SET title = ${title}, body = ${body}, author = ${author}, urltitle = ${urlTitle} WHERE title = ${articleName}", obj);
 }
+
 
 // Delete article
 function deleteArticle (title) {
