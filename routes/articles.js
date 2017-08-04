@@ -11,21 +11,23 @@ router.get('/new', (req, res) => {
 
 router.route('/:title/edit')
   .get( (req, res) => {
-    var editArticle = articles.getArticle(req.params.title);
-    res.render('./articles/edit', editArticle);
+    articles.getArticle(req.params.title)
+    .then( (data) => {
+      res.render('./articles/edit', data);
+    })
   });
 
 router.route('/:title')
   .put( (req, res) => {
-    //console.log('Put request');
+    console.log('PUT');
     articles.editArticle(req.params.title, req.body)
-      .then(() => {
-
+      .then( () => {
+        console.log("here", req.body);
+        res.redirect( 200, `/articles/${ req.body.title }` );
       })
       .catch((err) => {
-        res.json({
-        'success' : true
-      });
+        console.log(err);
+        res.redirect( 400, `/articles/${ req.params.title}/edit`);
     });
 
   })
