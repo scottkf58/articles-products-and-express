@@ -21,7 +21,8 @@ function addArticle (newArt) {
     author : newArt.author,
     urlTitle : encodeURI(newArt.title)
   };
-  collection.push(tempArt);
+  //collection.push(tempArt);
+  return db.none( `INSERT INTO articles VALUES (default, ${tempArt.title}, ${tempArt.body}, ${tempArt.author}, ${tempArt.urlTitle})` );
 }
 
 // Get request
