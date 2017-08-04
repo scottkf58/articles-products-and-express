@@ -57,10 +57,15 @@ router.route('/')
     console.log( articles.getAllArticles());*/
   })
   .post( (req, res) => {
-    articles.addArticle(req.body);
-    // res.json({
-    //   'success' : true
-    // });
+    articles.addArticle(req.body)
+      .then(() => {
+        res.json({
+           'success' : true
+        });
+      })
+      .catch((err) => {
+        console.log( err );
+      });
   });
 
 
