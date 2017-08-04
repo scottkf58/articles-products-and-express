@@ -18,15 +18,22 @@ router.route('/:title/edit')
 router.route('/:title')
   .put( (req, res) => {
     //console.log('Put request');
-    articles.editArticle(req.params.title, req.body);
+    articles.editArticle(req.params.title, req.body)
+      .then(() => {
 
-    // res.json({
-    //   'success' : true
-    // });
+      })
+      .catch((err) => {
+        res.json({
+        'success' : true
+      });
+    });
+
   })
   .get( (req, res) => {
-    var thisArticle = articles.getArticle(req.params.title);
-    res.render('./articles/articles', thisArticle);
+    articles.getArticle(req.params.title)
+      .then((data) => {
+        res.render('./articles/articles', {data});
+      });
     // res.json({
     //   'success' : true
     // });
@@ -59,12 +66,11 @@ router.route('/')
   .post( (req, res) => {
     articles.addArticle(req.body)
       .then(() => {
-        res.json({
-           'success' : true
-        });
+      res.redirect( 200, './articles' );
       })
       .catch((err) => {
         console.log( err );
+        res.redirect( 400, './articles/new' );
       });
   });
 
