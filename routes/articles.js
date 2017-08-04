@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const articles = require('../db/articles.js');
+const articles = require('../db/database.js');
 
 
 router.get('/new', (req, res) => {
@@ -41,13 +41,23 @@ router.route('/:title')
 
 router.route('/')
   .get( (req, res) => {
-    var articleList = {
-      articleList : articles.getAll()
+    articles.getAllArticles()
+      .then((data)=> {
+/*        console.log( data );*/
+
+        res.render('../views/articles/index', {data});
+
+      })
+      .catch((err) => {
+        console.log( err );
+      });
+    /*var articleList = {
+      articleList : articles.getAllArticles()
     };
-    res.render('./articles/index', articleList);
+    console.log( articles.getAllArticles());*/
   })
   .post( (req, res) => {
-    articles.add(req.body);
+    articles.addArticle(req.body);
     // res.json({
     //   'success' : true
     // });
