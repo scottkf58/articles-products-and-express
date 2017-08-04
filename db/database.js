@@ -50,12 +50,13 @@ function deleteArticle (title) {
       var index = collection.indexOf(element);
       collection.splice(index, 1);
     }
-  })
+  });
 }
 
 // Get request
 function getArticle (title) {
-  return db.one(`SELECT * FROM articles WHERE title = ${title}`);
+  console.log( `title is ${title}`);
+  return db.one(`SELECT * FROM articles WHERE title = '${title}'`);
 }
 
 
